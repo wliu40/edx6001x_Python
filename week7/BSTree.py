@@ -10,6 +10,7 @@ class BSTree():
     def __init__(self):
         self.root = None
         self.stack = []
+        self.flag = False
         
     def preorderTrav(self):
         self.preorderTravHelper(self.root)
@@ -46,29 +47,32 @@ class BSTree():
     def getRoot(self):
         return self.root
     
+    flag = False
     def DFS(self, _root, target):        
-        print self.stack
-        if _root == None:
+        
+        if _root == None or self.flag == True:
             return
         self.stack.append(_root.val)
         if _root.val == target:
+            self.flag = True
             return
         
         self.DFS(_root.left, target)
         self.DFS(_root.right, target)
-        if _root.val != target:
+        if self.stack[-1] != target:
             self.stack.pop(-1)
         
         
             
-l = [2,5,1,4,6]
+l = [2,5,1,4]
 bt = BSTree()
 bt.convert(l)
-bt.preorderTrav()
+#bt.preorderTrav()
 print ''
-stack = []
-bt.DFS(bt.getRoot(),1)
+#stack = []
+#flag = False
+bt.DFS(bt.getRoot(),6)
 print bt.stack
-
+print bt.flag
 
             
